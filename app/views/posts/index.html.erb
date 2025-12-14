@@ -1,2 +1,18 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<h1>Posts</h1>
+
+<% @posts.each do |post| %>
+  <h2><%= link_to post.title, post %></h2>
+  <p><%= post.body %></p>
+
+  <% if user_signed_in? %>
+    <p><strong>Author:<strong> <%= post.user.email %></p>
+  <% else %>
+    <p><em>Author: Anonymous</em></p>
+  <% end %>
+<% end %>
+
+<% if user_signed_in? %>
+  <%= link_to "New Post", new_post_path %>
+<% else %>
+  <%= link_to "Sign in to write a post", new_user_session_path %>
+<% end %>

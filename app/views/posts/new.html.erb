@@ -1,18 +1,17 @@
-<h1>Posts</h1>
+<h1>New Post</h1>
 
-<% @posts.each do |post| %>
-  <h2><%= link_to post.title, post %></h2>
-  <p><%= post.body %></p>
+<%= form_with model: @post do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
 
-  <% if user_signed_in? %>
-    <p><strong>Author:<strong> <%= post.user.email %></p>
-  <% else %>
-    <p><em>Author: Anonymous</em></p>
-  <% end %>
-<% end %>
+  <div>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </div>
 
-<% if user_signed_in? %>
-  <%= link_to "New Post", new_post_path %>
-<% else %>
-  <%= link_to "Sign in to write a post", new_user_session_path %>
+  <div>
+    <%= form.submit "Create Post" %>
+  </div>
 <% end %>
